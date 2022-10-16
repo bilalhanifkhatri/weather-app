@@ -10,8 +10,9 @@
         text-align: center;
       }
       body {
+        height: 100%;
         background-repeat: no-repeat;
-        background-size: 100%;
+        background-size: cover;
         margin: 0%;
         padding: 0%;
         display: flex;
@@ -73,7 +74,9 @@
             result.innerHTML += `</br>Min Temp: ${parseFloat(
               response.data.main.temp_max - 273.15
             ).toFixed(2)}`;
-            result.innerHTML += `${response.data.dt}`;
+            result.innerHTML += `</br>Humidity: ${parseFloat(
+              response.data.main.humidity
+            ).toFixed(2)}`;
             console.log(response.data);
           })
           .catch(function (error) {
