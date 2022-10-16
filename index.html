@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <title>Weather App</title>
+  </head>
+  <body>
+    <h1>Weather App</h1>
+    <form onsubmit="onClick(); return false">
+      <label for="cityName">Enter City Name:</label>
+      <input type="text" id="cityName" /><br />
+      <button type="submit">Show</button>
+    </form>
+    <div class="resultDiv">
+      <p id="result"></p>
+    </div>
+    <script>
+
+        
+      function onClick() {
+        let cityName = document.querySelector("#cityName").value;
+        let result = document.querySelector("#result");
+
+        const apiKey = "fad0b5a97f9987d1423d2db6eff90e36";
+        axios
+          .get(
+            `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}`
+          )
+          .then(function (response) {
+            result.innerHTML = null;
+            result.innerHTML += `Current Temp: ${parseFloat(
+              response.data.main.temp - 273.15
+            ).toFixed(2)}`;
+            result.innerHTML += `</br>Min Temp: ${parseFloat(
+              response.data.main.temp_min - 273.15
+            ).toFixed(2)}`;
+            result.innerHTML += `</br>Min Temp: ${parseFloat(
+              response.data.main.temp_max - 273.15
+            ).toFixed(2)}`;
+            console.log(response.data);
+          })
+          .catch(function (error) {
+            // handle error
+            console.log(error);
+          });
+      }
+    </script>
+  </body>
+</html>
